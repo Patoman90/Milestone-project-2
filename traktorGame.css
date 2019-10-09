@@ -5,13 +5,16 @@
 
 border:5px solid rgb(255, 60, 0);
 
-/*Gives a background incase the image doesn'y load (Defensive programming)*/
+/*Gives a background color incase the image doesn't load (Defensive programming)*/
 background-color: rgb(83, 190, 92);
  }
 
  #centerTheCanvas{
     position: relative;
-    margin:auto;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:25px;
+    margin-top:25px;
     width: 1200px;
     height: 500px;
 }​
@@ -25,6 +28,7 @@ background-color: rgb(83, 190, 92);
 /* H1 Farmer vs Aliens CSS*/
 
 #GameName{
+    
     color:rgba(6, 199, 22, 0.651);
     font-size:50px;
     font-family: fantasy;
@@ -35,6 +39,7 @@ background-color: rgb(83, 190, 92);
 /* H1 Level CSS*/
 
 #Level{
+    
     text-align: center;
     background-color: rgb(255, 208, 0) !important;
 }
@@ -42,6 +47,7 @@ background-color: rgb(83, 190, 92);
 /*Footer CSS */
 
 .footer{
+    height:25px;
     position: relative;
     text-align: center;
     background-color: rgb(255, 208, 0) !important;
