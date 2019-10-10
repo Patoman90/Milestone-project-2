@@ -27,6 +27,37 @@ BackgroundMusic = function()
         }
     }
 
+    Alien = function()
+{ document.getElementById("Ufo");
+    
+
+    if(isGameLive = true) 
+    {Ufo.play();
+    }
+                
+   else { 
+            Ufo.stop();
+            GameMusicOn = false;
+        }
+    }
+
+    Tractor = function()
+    { document.getElementById("Farmer");
+        
+    
+        if(isGameLive = true) 
+        {Farmer.play();
+        }
+                    
+       else { 
+                Farmer.stop();
+                GameMusicOn = false;
+            }
+        }
+
+ 
+
+         
     
 
 //Game character prototype class.
@@ -63,20 +94,24 @@ var Player = new GameCharacter(-50, 300, width, width,0)
 var enemies = [ 
 
 //First enemy.
-new GameCharacter(75, 50, width, width,2),
+new GameCharacter(75, 50, width, width,4),
 
 //Second enemy.
-new GameCharacter(220, 150, width, width,6),
+new GameCharacter(220, 150, width, width,7),
 
 //Third enemy.
-new GameCharacter(450, screenHeight - 100, width, width,5),
+new GameCharacter(450, screenHeight - 100, width, width,9),
 
 //Fourth enemy.
-new GameCharacter(600, 100, width, width,4),
+new GameCharacter(600, 100, width, width,6),
 
-//Fifth enemy
-new GameCharacter(800, screenHeight - 150, width, width,3),
+//Fifth enemy.
+new GameCharacter(700, 100, width, width,5),
+
+//Sixth enemy.
+new GameCharacter(850, screenHeight - 150, width, width,7),
 ];
+
 
 //Goal.
 var Goal = new GameCharacter(screenWidth -170, 300, width, width,0)
@@ -92,54 +127,15 @@ var loadSprites = function() {
     sprites.Background = new Image();
     sprites.Background.src = "assets/Field photo.jpg";
     
-    //starting image (facing right)
+    //Player sprite
     sprites.Player = new Image();
     sprites.Player.src = "assets/Tractor move right 1-1.png.png";
 
-    //next image (facing right)
-    //sprites.player = new Image();
-    //sprites.player.src = "assets/Tractor move right 1-2.png.png";
-
-    //next image (facing right)
-    //sprites.player = new Image();
-    //sprites.player.src = "assets/Tractor move right 1-3.png.png";
-
-    //next image (facing right)
-    //sprites.player = new Image();
-    //sprites.player.src = "assets/Tractor move right 1-4.png.png";
-
-    //last image if gameover (facing right)
-    //sprites.player = new Image();
-    //sprites.player.src = "assets/Tractor burn right 1-9.png.png";
-    
-
-     //starting image (facing left)
-     //sprites.player = new Image();
-     //sprites.player.src = "assets/Tractor move left 1-5.png.png";
- 
-     //next image (facing left)
-     //sprites.player = new Image();
-     //sprites.player.src = "assets/Tractor move left 1-6.png.png";
- 
-     //next image (facing left)
-     //sprites.player = new Image();
-     //sprites.player.src = "assets/Tractor move left 1-7.png.png";
- 
-     //next image (facing left)
-     //sprites.player = new Image();
-     //sprites.player.src = "assets/Tractor move left 1-8.png.png";
-
-     //last image if gameover (facing left)
-     //sprites.player = new Image();
-     //sprites.player.src = "assets/Tractor burn left 1-10.png.png";
 
      //Enemy sprite A
      sprites.enemies = new Image();
     sprites.enemies.src = "assets/Enemy 2-1.png.png";
 
-     //Enemy sprite B
-     //sprites.enemies = new Image();
-     //sprites.enemies.src = "assets/Enemy 2-2.png.png";
 
      //Goal sprite 
      sprites.Goal = new Image();
@@ -148,7 +144,7 @@ var loadSprites = function() {
 
 
 
-//PLayer Moves left or right.
+//PLayer Moves movement
 
 
 //Player moves right
@@ -159,20 +155,25 @@ document.onkeydown = function(event){
 
     if (keyPressed == 39)
     {
+        
         Player.speed = Player.maxSpeed;
+        
     }
 
  //Player moves left
     else if(keyPressed == 37){
+        
         Player.speed = -Player.maxSpeed;
+        
     }
-
+    
 };
 ;
 
 
 document.onkeyup = function(event) {
     Player.speed = 0;
+    
 }
 
 //Collision functions.
@@ -227,17 +228,19 @@ var update = function() {
 
     if(checkCollisions(Player, Goal)){
     endGameLogic("You survived!");
+
     }
 
     Player.moveHorizontally();
 
     enemies.forEach(function(element) {
         if(checkCollisions(Player, element)){
-            endGameLogic("You got abudcted!");
+            endGameLogic("You got captured and probed by Aliens!");
         }
       element.moveVertically (); 
      });
      enemies[0].moveVertically();
+     
 
      
          
@@ -253,6 +256,8 @@ var endGameLogic = function(text)
 }
 
 
+
+
 //Step function to put all the game events etc inside.
 var step = function() 
 {
@@ -260,20 +265,27 @@ var step = function()
 
     draw();
     
-    BackgroundMusic();
     
-    
-   
-
 
     if (isGameLive) 
     {
         window.requestAnimationFrame(step);
     
-    
+        
+
+        function Audio()
+        {
+            BackgroundMusic();
+            
+            Alien();
+              
+        }
+        
 
     }
     
+    Audio();
+    Tractor();
 }
 //Load sprites is called.
 loadSprites();
