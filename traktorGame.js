@@ -10,6 +10,25 @@ let screenHeight = 500;
 let width = 65;
 var isGameLive = true;
 
+//Audio
+var GameMusicOn = true;
+
+BackgroundMusic = function()
+{ document.getElementById("GameMusic");
+    
+
+    if(isGameLive = true) 
+    {GameMusic.play();
+    }
+                
+   else { 
+            GameMusic.stop();
+            GameMusicOn = false;
+        }
+    }
+
+    
+
 //Game character prototype class.
 class GameCharacter{
     constructor(x,y,width,height,speed){
@@ -129,28 +148,27 @@ var loadSprites = function() {
 
 
 
-//PLayer controls
+//PLayer Moves left or right.
+
 
 //Player moves right
+
 document.onkeydown = function(event){
     
     let keyPressed = event.keyCode;
 
-    if (keyPressed == 39){
-
-
-        
-        
+    if (keyPressed == 39)
+    {
         Player.speed = Player.maxSpeed;
-
-      
     }
 
-//Player moves left
+ //Player moves left
     else if(keyPressed == 37){
         Player.speed = -Player.maxSpeed;
     }
+
 };
+;
 
 
 document.onkeyup = function(event) {
@@ -225,22 +243,36 @@ var update = function() {
          
       
 }
+//End Game message
 
-var endGameLogic = function(text) {
-isGameLive = false;
-alert(text);
-window.location = "";
+var endGameLogic = function(text) 
+{
+    isGameLive = false;
+    alert(text);
+    window.location = "";
 }
 
 
 //Step function to put all the game events etc inside.
-var step = function() {
+var step = function() 
+{
     update();
-    draw();
 
-if (isGameLive) {
-    window.requestAnimationFrame(step);
-}
+    draw();
+    
+    BackgroundMusic();
+    
+    
+   
+
+
+    if (isGameLive) 
+    {
+        window.requestAnimationFrame(step);
+    
+    
+
+    }
     
 }
 //Load sprites is called.
